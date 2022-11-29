@@ -128,11 +128,11 @@ insert into servicos (idservico, descricao_servico, preco_servico, consulta_entr
 insert into servicos (idservico, descricao_servico, preco_servico, consulta_entrada, consulta_saida) values (9, 'Aenean fermentum.', '$286.92', '15.02.2022', '16/01/2022');
 insert into servicos (idservico, descricao_servico, preco_servico, consulta_entrada, consulta_saida) values (10, 'Proin risus.', '$209.48', '04.01.2022', '22/01/2022');
 
-update endereco set rua = "Paul mantau",numero_casa = 41 WHERE cep = "70-390-0187";
-update endereco set rua = "Suguma Street",numero_casa = 51 WHERE cep = "58-934-7880";
-update endereco set rua = "Sauls Law",numero_casa = 45 WHERE cep = "43-176-4249";
-update endereco set rua = "Morgan Freat",numero_casa = 32 WHERE cep = "16-561-9077";
-update endereco set rua = "Brunas Street",numero_casa = 10 WHERE cep = "46-184-3805";
+update endereco set rua = "Paul mantau",numero_casa = 41 WHERE cep = '70-390-0187';
+update endereco set rua = "Suguma Street",numero_casa = 51 WHERE cep = '58-934-7880';
+update endereco set rua = "Sauls Law",numero_casa = 45 WHERE cep = '43-176-4249';
+update endereco set rua = "Morgan Freat",numero_casa = 32 WHERE cep = '16-561-9077';
+update endereco set rua = "Brunas Street",numero_casa = 10 WHERE cep = '46-184-3805';
 
 update equipamentos set quantidade = 12, ferramenta = "Marreta" WHERE idequipamentos = 1;
 update equipamentos set quantidade = 23, ferramenta = "Bisturi" WHERE idequipamentos = 4;
@@ -146,11 +146,11 @@ update servicos set descricao_servico = "Houve uma grande recaida comparado a ul
 update servicos set descricao_servico = "Conforme a normalidade", preco_servico = "$552.0" WHERE idservico = 2;
 update servicos set descricao_servico = "Apresenta uma crescente melhora", preco_servico = "$80.90" WHERE idservico = 3;
 
-update funcionarios set nome_funcionario = "Serena Whitehouse",funcao = "Anestesista" WHERE cpf = "15-322-1474" ;
-update funcionarios set nome_funcionario = "João Cabral",funcao = "Cirurgião" WHERE cpf = "46-205-3773" ;
-update funcionarios set nome_funcionario = "Wen kado hashi",funcao = "Secretario" WHERE cpf = "07-190-2071" ;
-update funcionarios set nome_funcionario = "Vasco da gama",funcao = "Enfermeiro" WHERE cpf = "64-070-5086" ;
-update funcionarios set nome_funcionario = "Melon Musk",funcao = "Zelador" WHERE cpf = "16-613-9710"  ;
+update funcionarios set nome_funcionario = "Serena Whitehouse",funcao = "Anestesista" WHERE cpf = '15-322-1474' ;
+update funcionarios set nome_funcionario = "João Cabral",funcao = "Cirurgião" WHERE cpf = '46-205-3773' ;
+update funcionarios set nome_funcionario = "Wen kado hashi",funcao = "Secretario" WHERE cpf = '07-190-2071' ;
+update funcionarios set nome_funcionario = "Vasco da gama",funcao = "Enfermeiro" WHERE cpf = '64-070-5086' ;
+update funcionarios set nome_funcionario = "Melon Musk",funcao = "Zelador" WHERE cpf = '16-613-9710'  ;
 
 update paciente set sexo_paciente = "M",especie_paciente = "Ornitorrinco" WHERE idpaciente = 7; 
 update paciente set sexo_paciente = "M",especie_paciente = "Cachorro" WHERE idpaciente = 3; 
@@ -158,11 +158,11 @@ update paciente set sexo_paciente = "F",especie_paciente = "Cabra" WHERE idpacie
 update paciente set sexo_paciente = "F",especie_paciente = "Ovelha" WHERE idpaciente = 9; 
 update paciente set sexo_paciente = "M",especie_paciente = "Bode" WHERE idpaciente = 10; 
 
-DELETE FROM endereco WHERE cep = "70-390-0187";
-DELETE FROM endereco WHERE cep = "58-934-7880";
-DELETE FROM endereco WHERE cep = "43-176-4249";
-DELETE FROM endereco WHERE cep = "16-561-9077";
-DELETE FROM endereco WHERE cep = "46-184-3805";
+DELETE FROM endereco WHERE cep = '70-390-0187';
+DELETE FROM endereco WHERE cep = '58-934-7880';
+DELETE FROM endereco WHERE cep = '43-176-4249';
+DELETE FROM endereco WHERE cep = '16-561-9077';
+DELETE FROM endereco WHERE cep = '46-184-3805';
 
 DELETE FROM equipamentos WHERE idequipamentos = 1 ;
 DELETE FROM equipamentos WHERE idequipamentos = 4;
@@ -176,16 +176,30 @@ DELETE FROM servicos WHERE idservico = 3;
 DELETE FROM servicos WHERE idservico = 4;
 DELETE FROM servicos WHERE idservico = 8;
 
-DELETE FROM funcionarios WHERE cpf = "15-322-1474";
-DELETE FROM funcionarios WHERE cpf = "46-205-3773";
-DELETE FROM funcionarios WHERE cpf = "07-190-2071";
-DELETE FROM funcionarios WHERE cpf = "64-070-5086";
-DELETE FROM funcionarios WHERE cpf = "16-613-9710";
+DELETE FROM funcionarios WHERE cpf = '15-322-1474';
+DELETE FROM funcionarios WHERE cpf = '46-205-3773';
+DELETE FROM funcionarios WHERE cpf = '07-190-2071';
+DELETE FROM funcionarios WHERE cpf = '64-070-5086';
+DELETE FROM funcionarios WHERE cpf = '16-613-9710';
 
 DELETE FROM paciente WHERE idpaciente = "9";
 DELETE FROM paciente WHERE idpaciente = "4";
 DELETE FROM paciente WHERE idpaciente = "7";
 DELETE FROM paciente WHERE idpaciente = "1";
 DELETE FROM paciente WHERE idpaciente = "2";
+
+
+SELECT * FROM endereco ORDER BY cep ASC;
+SELECT * FROM paciente ORDER BY idpaciente ASC;
+SELECT * FROM funcionarios ORDER BY cpf ASC;
+SELECT * FROM servicos ORDER BY idservico ASC;
+SELECT * FROM equipamentos ORDER BY idequipamentos ASC;
+
+SELECT sexo_paciente FROM paciente WHERE idpaciente = 2;
+SELECT nome_funcionario FROM funcionarios WHERE cpf = '71-428-9054';
+SELECT preco_servico FROM servicos WHERE idservico = 5;
+SELECT rua FROM endereco WHERE cep = '24-033-5545';
+SELECT quantidade FROM equipamentos WHERE idequipamentos = 3;
+
 
 
