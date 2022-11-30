@@ -51,11 +51,16 @@ ferramenta VARCHAR(99) NOT NULL
 );
 
 CREATE TABLE endereco_has_tutor_animal(
-	FOREIGN KEY (endereco_cep) REFERENCES endereco(cep),
+	endereco_cep INT NOT NULL,
+    cpf_tutor INT NOT NULL,
+    FOREIGN KEY (endereco_cep) REFERENCES endereco(cep),
     FOREIGN KEY (cpf_tutor) REFERENCES tutor_animal(cpf_tutor)
 );
 
 CREATE TABLE paciente_has_servico_consulta(
+idpaciente INT NOT NULL,
+id_servico INT NOT NULL,
+cpf INT NOT NULL,
 FOREIGN KEY (idpaciente) REFERENCES paciente(idpaciente),
     FOREIGN KEY (id_servico) REFERENCES servicos(id_servico),
 FOREIGN KEY (cpf) REFERENCES funcionarios(cpf)
@@ -64,33 +69,35 @@ FOREIGN KEY (cpf) REFERENCES funcionarios(cpf)
 );
 
 CREATE TABLE equipamentos_has_servicos_animais(
+id_servico INT NOT NULL,
+idequipamentos INT NOT NULL,
 FOREIGN KEY (id_servico) REFERENCES servicos(id_servico),
 FOREIGN KEY (idequipamentos) REFERENCES equipamentos(idequipamentos)
 
 
 );
 
-insert into endereco (cep, rua, complemento, numero_casa) values ('47-018-0514', '53614 Little Fleur Street', 'ornare imperdiet sapien urna pretium nisl ut volutpat sapien arcu', 354);
-insert into endereco (cep, rua, complemento, numero_casa) values ('16-561-9077', '47 Arapahoe Circle', 'eget massa tempor convallis nulla neque libero convallis eget eleifend luctus ultricies eu nibh quisque id justo', 33);
-insert into endereco (cep, rua, complemento, numero_casa) values ('70-390-0187', '745 Maple Street', 'lectus vestibulum quam sapien varius ut blandit non interdum in ante vestibulum ante ipsum primis in faucibus', 66);
-insert into endereco (cep, rua, complemento, numero_casa) values ('63-337-6349', '63 American Parkway', 'lacinia sapien quis libero nullam sit amet turpis elementum ligula vehicula consequat', 291);
-insert into endereco (cep, rua, complemento, numero_casa) values ('46-184-3805', '54 Meadow Vale Way', 'quam pede lobortis ligula sit amet eleifend pede libero quis orci nullam', 11);
-insert into endereco (cep, rua, complemento, numero_casa) values ('58-934-7880', '45293 Montana Junction', 'sollicitudin mi sit amet lobortis sapien sapien non mi integer ac neque duis bibendum', 440);
-insert into endereco (cep, rua, complemento, numero_casa) values ('24-033-5545', '4729 Arapahoe Point', 'ullamcorper purus sit amet nulla quisque arcu libero rutrum ac lobortis vel dapibus at', 363);
-insert into endereco (cep, rua, complemento, numero_casa) values ('43-176-4249', '44 Westport Parkway', 'nisi vulputate nonummy maecenas tincidunt lacus at velit vivamus vel nulla eget', 399);
-insert into endereco (cep, rua, complemento, numero_casa) values ('78-598-9369', '20728 Tennyson Hill', 'aliquet pulvinar sed nisl nunc rhoncus dui vel sem sed sagittis nam congue risus semper', 11);
-insert into endereco (cep, rua, complemento, numero_casa) values ('16-613-9710', '828 Carey Avenue', 'mattis pulvinar nulla pede ullamcorper augue a suscipit nulla elit ac nulla sed vel', 293);
+insert into endereco (cep, rua, complemento, numero_casa) values (470180514, '53614 Little Fleur Street', 'ornare imperdiet sapien urna pretium nisl ut volutpat sapien arcu', 354);
+insert into endereco (cep, rua, complemento, numero_casa) values (165619077, '47 Arapahoe Circle', 'eget massa tempor convallis nulla neque libero convallis eget eleifend luctus ultricies eu nibh quisque id justo', 33);
+insert into endereco (cep, rua, complemento, numero_casa) values (703900187, '745 Maple Street', 'lectus vestibulum quam sapien varius ut blandit non interdum in ante vestibulum ante ipsum primis in faucibus', 66);
+insert into endereco (cep, rua, complemento, numero_casa) values (633376349, '63 American Parkway', 'lacinia sapien quis libero nullam sit amet turpis elementum ligula vehicula consequat', 291);
+insert into endereco (cep, rua, complemento, numero_casa) values (461843805, '54 Meadow Vale Way', 'quam pede lobortis ligula sit amet eleifend pede libero quis orci nullam', 11);
+insert into endereco (cep, rua, complemento, numero_casa) values (589347880, '45293 Montana Junction', 'sollicitudin mi sit amet lobortis sapien sapien non mi integer ac neque duis bibendum', 440);
+insert into endereco (cep, rua, complemento, numero_casa) values (240335545, '4729 Arapahoe Point', 'ullamcorper purus sit amet nulla quisque arcu libero rutrum ac lobortis vel dapibus at', 363);
+insert into endereco (cep, rua, complemento, numero_casa) values (431764249, '44 Westport Parkway', 'nisi vulputate nonummy maecenas tincidunt lacus at velit vivamus vel nulla eget', 399);
+insert into endereco (cep, rua, complemento, numero_casa) values (785989369, '20728 Tennyson Hill', 'aliquet pulvinar sed nisl nunc rhoncus dui vel sem sed sagittis nam congue risus semper', 11);
+insert into endereco (cep, rua, complemento, numero_casa) values (166139710, '828 Carey Avenue', 'mattis pulvinar nulla pede ullamcorper augue a suscipit nulla elit ac nulla sed vel', 293);
 
-insert into funcionarios (cpf, nome_funcionario, salario, funcao) values ('15-322-1474', 'Bryanty Dellenbach', '$3691.22', 'Vestibulum quam sapien, varius ut, blandit non, interdum in, ante.');
-insert into funcionarios (cpf, nome_funcionario, salario, funcao) values ('79-475-4770', 'Pattie Meiner', '$3671.23', 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit.');
-insert into funcionarios (cpf, nome_funcionario, salario, funcao) values ('81-975-3167', 'Emlynn Espinha', '$3143.94', 'Praesent lectus.');
-insert into funcionarios (cpf, nome_funcionario, salario, funcao) values ('15-086-9521', 'Korney Knatt', '$3746.23', 'Pellentesque viverra pede ac diam.');
-insert into funcionarios (cpf, nome_funcionario, salario, funcao) values ('86-384-9628', 'Myrwyn Shakspeare', '$3439.44', 'Nullam varius.');
-insert into funcionarios (cpf, nome_funcionario, salario, funcao) values ('46-205-3773', 'Wallie Durbann', '$3336.47', 'Vivamus tortor.');
-insert into funcionarios (cpf, nome_funcionario, salario, funcao) values ('73-395-9357', 'Lynne Milillo', '$2908.23', 'Maecenas ut massa quis augue luctus tincidunt.');
-insert into funcionarios (cpf, nome_funcionario, salario, funcao) values ('07-190-2071', 'Egor Summerhayes', '$3499.88', 'Donec vitae nisi.');
-insert into funcionarios (cpf, nome_funcionario, salario, funcao) values ('64-070-5086', 'Ninetta Revey', '$2820.05', 'Fusce lacus purus, aliquet at, feugiat non, pretium quis, lectus.');
-insert into funcionarios (cpf, nome_funcionario, salario, funcao) values ('71-428-9054', 'Chester Rosthorn', '$3495.94', 'Nullam varius.');
+insert into funcionarios (cpf, nome_funcionario, salario, funcao) values (153221474, 'Bryanty Dellenbach', '$3691.22', 'Vestibulum quam sapien, varius ut, blandit non, interdum in, ante.');
+insert into funcionarios (cpf, nome_funcionario, salario, funcao) values (794754770, 'Pattie Meiner', '$3671.23', 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit.');
+insert into funcionarios (cpf, nome_funcionario, salario, funcao) values (819753167, 'Emlynn Espinha', '$3143.94', 'Praesent lectus.');
+insert into funcionarios (cpf, nome_funcionario, salario, funcao) values (150869521, 'Korney Knatt', '$3746.23', 'Pellentesque viverra pede ac diam.');
+insert into funcionarios (cpf, nome_funcionario, salario, funcao) values (863849628, 'Myrwyn Shakspeare', '$3439.44', 'Nullam varius.');
+insert into funcionarios (cpf, nome_funcionario, salario, funcao) values (462053773, 'Wallie Durbann', '$3336.47', 'Vivamus tortor.');
+insert into funcionarios (cpf, nome_funcionario, salario, funcao) values (733959357, 'Lynne Milillo', '$2908.23', 'Maecenas ut massa quis augue luctus tincidunt.');
+insert into funcionarios (cpf, nome_funcionario, salario, funcao) values (071902071, 'Egor Summerhayes', '$3499.88', 'Donec vitae nisi.');
+insert into funcionarios (cpf, nome_funcionario, salario, funcao) values (640705086, 'Ninetta Revey', '$2820.05', 'Fusce lacus purus, aliquet at, feugiat non, pretium quis, lectus.');
+insert into funcionarios (cpf, nome_funcionario, salario, funcao) values (714289054, 'Chester Rosthorn', '$3495.94', 'Nullam varius.');
 
 
 insert into equipamentos (idequipamentos, quantidade, ferramenta) values (1, 70, 'Milrinone Lactate');
@@ -128,11 +135,11 @@ insert into servicos (idservico, descricao_servico, preco_servico, consulta_entr
 insert into servicos (idservico, descricao_servico, preco_servico, consulta_entrada, consulta_saida) values (9, 'Aenean fermentum.', '$286.92', '15.02.2022', '16/01/2022');
 insert into servicos (idservico, descricao_servico, preco_servico, consulta_entrada, consulta_saida) values (10, 'Proin risus.', '$209.48', '04.01.2022', '22/01/2022');
 
-update endereco set rua = "Paul mantau",numero_casa = 41 WHERE cep = '70-390-0187';
-update endereco set rua = "Suguma Street",numero_casa = 51 WHERE cep = '58-934-7880';
-update endereco set rua = "Sauls Law",numero_casa = 45 WHERE cep = '43-176-4249';
-update endereco set rua = "Morgan Freat",numero_casa = 32 WHERE cep = '16-561-9077';
-update endereco set rua = "Brunas Street",numero_casa = 10 WHERE cep = '46-184-3805';
+update endereco set rua = "Paul mantau",numero_casa = 41 WHERE cep = 703900187;
+update endereco set rua = "Suguma Street",numero_casa = 51 WHERE cep = 589347880;
+update endereco set rua = "Sauls Law",numero_casa = 45 WHERE cep = 431764249;
+update endereco set rua = "Morgan Freat",numero_casa = 32 WHERE cep = 165619077;
+update endereco set rua = "Brunas Street",numero_casa = 10 WHERE cep = 461843805;
 
 update equipamentos set quantidade = 12, ferramenta = "Marreta" WHERE idequipamentos = 1;
 update equipamentos set quantidade = 23, ferramenta = "Bisturi" WHERE idequipamentos = 4;
@@ -146,11 +153,11 @@ update servicos set descricao_servico = "Houve uma grande recaida comparado a ul
 update servicos set descricao_servico = "Conforme a normalidade", preco_servico = "$552.0" WHERE idservico = 2;
 update servicos set descricao_servico = "Apresenta uma crescente melhora", preco_servico = "$80.90" WHERE idservico = 3;
 
-update funcionarios set nome_funcionario = "Serena Whitehouse",funcao = "Anestesista" WHERE cpf = '15-322-1474' ;
-update funcionarios set nome_funcionario = "João Cabral",funcao = "Cirurgião" WHERE cpf = '46-205-3773' ;
-update funcionarios set nome_funcionario = "Wen kado hashi",funcao = "Secretario" WHERE cpf = '07-190-2071' ;
-update funcionarios set nome_funcionario = "Vasco da gama",funcao = "Enfermeiro" WHERE cpf = '64-070-5086' ;
-update funcionarios set nome_funcionario = "Melon Musk",funcao = "Zelador" WHERE cpf = '16-613-9710'  ;
+update funcionarios set nome_funcionario = "Serena Whitehouse",funcao = "Anestesista" WHERE cpf = 153221474;
+update funcionarios set nome_funcionario = "João Cabral",funcao = "Cirurgião" WHERE cpf = 462053773;
+update funcionarios set nome_funcionario = "Wen kado hashi",funcao = "Secretario" WHERE cpf = 071902071;
+update funcionarios set nome_funcionario = "Vasco da gama",funcao = "Enfermeiro" WHERE cpf = 640705086;
+update funcionarios set nome_funcionario = "Melon Musk",funcao = "Zelador" WHERE cpf = 166139710;
 
 update paciente set sexo_paciente = "M",especie_paciente = "Ornitorrinco" WHERE idpaciente = 7; 
 update paciente set sexo_paciente = "M",especie_paciente = "Cachorro" WHERE idpaciente = 3; 
@@ -158,11 +165,11 @@ update paciente set sexo_paciente = "F",especie_paciente = "Cabra" WHERE idpacie
 update paciente set sexo_paciente = "F",especie_paciente = "Ovelha" WHERE idpaciente = 9; 
 update paciente set sexo_paciente = "M",especie_paciente = "Bode" WHERE idpaciente = 10; 
 
-DELETE FROM endereco WHERE cep = '70-390-0187';
-DELETE FROM endereco WHERE cep = '58-934-7880';
-DELETE FROM endereco WHERE cep = '43-176-4249';
-DELETE FROM endereco WHERE cep = '16-561-9077';
-DELETE FROM endereco WHERE cep = '46-184-3805';
+DELETE FROM endereco WHERE cep = 703900187;
+DELETE FROM endereco WHERE cep = 589347880;
+DELETE FROM endereco WHERE cep = 43176-4249;
+DELETE FROM endereco WHERE cep = 165619077;
+DELETE FROM endereco WHERE cep = 461843805;
 
 DELETE FROM equipamentos WHERE idequipamentos = 1 ;
 DELETE FROM equipamentos WHERE idequipamentos = 4;
@@ -176,17 +183,17 @@ DELETE FROM servicos WHERE idservico = 3;
 DELETE FROM servicos WHERE idservico = 4;
 DELETE FROM servicos WHERE idservico = 8;
 
-DELETE FROM funcionarios WHERE cpf = '15-322-1474';
-DELETE FROM funcionarios WHERE cpf = '46-205-3773';
-DELETE FROM funcionarios WHERE cpf = '07-190-2071';
-DELETE FROM funcionarios WHERE cpf = '64-070-5086';
-DELETE FROM funcionarios WHERE cpf = '16-613-9710';
+DELETE FROM funcionarios WHERE cpf = 153221474;
+DELETE FROM funcionarios WHERE cpf = 462053773;
+DELETE FROM funcionarios WHERE cpf = 071902071;
+DELETE FROM funcionarios WHERE cpf = 640705086;
+DELETE FROM funcionarios WHERE cpf = 166139710;
 
-DELETE FROM paciente WHERE idpaciente = "9";
-DELETE FROM paciente WHERE idpaciente = "4";
-DELETE FROM paciente WHERE idpaciente = "7";
-DELETE FROM paciente WHERE idpaciente = "1";
-DELETE FROM paciente WHERE idpaciente = "2";
+DELETE FROM paciente WHERE idpaciente = 9;
+DELETE FROM paciente WHERE idpaciente = 4;
+DELETE FROM paciente WHERE idpaciente = 7;
+DELETE FROM paciente WHERE idpaciente = 1;
+DELETE FROM paciente WHERE idpaciente = 2;
 
 
 SELECT * FROM endereco ORDER BY cep ASC;
@@ -196,9 +203,9 @@ SELECT * FROM servicos ORDER BY idservico ASC;
 SELECT * FROM equipamentos ORDER BY idequipamentos ASC;
 
 SELECT sexo_paciente FROM paciente WHERE idpaciente = 2;
-SELECT nome_funcionario FROM funcionarios WHERE cpf = '71-428-9054';
+SELECT nome_funcionario FROM funcionarios WHERE cpf = 714289054;
 SELECT preco_servico FROM servicos WHERE idservico = 5;
-SELECT rua FROM endereco WHERE cep = '24-033-5545';
+SELECT rua FROM endereco WHERE cep = 240335545;
 SELECT quantidade FROM equipamentos WHERE idequipamentos = 3;
 
 
