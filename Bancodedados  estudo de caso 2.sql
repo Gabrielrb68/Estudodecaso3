@@ -32,8 +32,8 @@ nome_paciente VARCHAR(255) NOT NULL,
 sexo_paciente CHAR(1) NOT NULL,
 especie_paciente VARCHAR(45) NOT NULL,
 nasc_paciente DATETIME(6) NOT NULL,
-tutor_animal_idtutor_animal INT NOT NULL
-  
+tutor_animal_cpf_tutor INT NOT NULL,
+FOREIGN KEY(tutor_animal_cpf_tutor) REFERENCES tutor_animal(cpf_tutor)
 );  
 
 CREATE TABLE servicos(
@@ -52,52 +52,51 @@ ferramenta VARCHAR(99) NOT NULL
 
 CREATE TABLE endereco_has_tutor_animal(
 	endereco_cep INT NOT NULL,
-    cpf_tutor INT NOT NULL,
+    tutor_animal_cpf_tutor INT NOT NULL,
+    PRIMARY KEY(endereco_cep, tutor_animal_cpf_tutor),
     FOREIGN KEY (endereco_cep) REFERENCES endereco(cep),
-    FOREIGN KEY (cpf_tutor) REFERENCES tutor_animal(cpf_tutor)
+    FOREIGN KEY (tutor_animal_cpf_tutor) REFERENCES tutor_animal(cpf_tutor)
 );
 
 CREATE TABLE paciente_has_servico_consulta(
-idpaciente INT NOT NULL,
-id_servico INT NOT NULL,
-cpf INT NOT NULL,
-FOREIGN KEY (idpaciente) REFERENCES paciente(idpaciente),
-    FOREIGN KEY (id_servico) REFERENCES servicos(id_servico),
-FOREIGN KEY (cpf) REFERENCES funcionarios(cpf)
-    
-
+paciente_idpaciente INT NOT NULL,
+servicos_idservico INT NOT NULL,
+PRIMARY KEY(paciente_idpaciente,servicos_idservico),
+FOREIGN KEY (paciente_idpaciente) REFERENCES paciente(idpaciente),
+    FOREIGN KEY (servicos_idservico) REFERENCES servicos(idservico)    
 );
 
 CREATE TABLE equipamentos_has_servicos_animais(
-id_servico INT NOT NULL,
-idequipamentos INT NOT NULL,
-FOREIGN KEY (id_servico) REFERENCES servicos(id_servico),
-FOREIGN KEY (idequipamentos) REFERENCES equipamentos(idequipamentos)
-
-
+servicos_idservico INT NOT NULL,
+equipamentos_idequipamentos INT NOT NULL,
+funcionarios_cpf INT NOT NULL,
+PRIMARY KEY(servicos_idservico,equipamentos_idequipamentos,funcionarios_cpf),
+FOREIGN KEY (servicos_idservico) REFERENCES servicos(idservico),
+FOREIGN KEY (equipamentos_idequipamentos) REFERENCES equipamentos(idequipamentos),
+FOREIGN KEY(funcionarios_cpf) REFERENCES funcionarios(cpf)
 );
 
-insert into endereco (cep, rua, complemento, numero_casa) values (470180514, '53614 Little Fleur Street', 'ornare imperdiet sapien urna pretium nisl ut volutpat sapien arcu', 354);
-insert into endereco (cep, rua, complemento, numero_casa) values (165619077, '47 Arapahoe Circle', 'eget massa tempor convallis nulla neque libero convallis eget eleifend luctus ultricies eu nibh quisque id justo', 33);
-insert into endereco (cep, rua, complemento, numero_casa) values (703900187, '745 Maple Street', 'lectus vestibulum quam sapien varius ut blandit non interdum in ante vestibulum ante ipsum primis in faucibus', 66);
-insert into endereco (cep, rua, complemento, numero_casa) values (633376349, '63 American Parkway', 'lacinia sapien quis libero nullam sit amet turpis elementum ligula vehicula consequat', 291);
-insert into endereco (cep, rua, complemento, numero_casa) values (461843805, '54 Meadow Vale Way', 'quam pede lobortis ligula sit amet eleifend pede libero quis orci nullam', 11);
-insert into endereco (cep, rua, complemento, numero_casa) values (589347880, '45293 Montana Junction', 'sollicitudin mi sit amet lobortis sapien sapien non mi integer ac neque duis bibendum', 440);
-insert into endereco (cep, rua, complemento, numero_casa) values (240335545, '4729 Arapahoe Point', 'ullamcorper purus sit amet nulla quisque arcu libero rutrum ac lobortis vel dapibus at', 363);
-insert into endereco (cep, rua, complemento, numero_casa) values (431764249, '44 Westport Parkway', 'nisi vulputate nonummy maecenas tincidunt lacus at velit vivamus vel nulla eget', 399);
-insert into endereco (cep, rua, complemento, numero_casa) values (785989369, '20728 Tennyson Hill', 'aliquet pulvinar sed nisl nunc rhoncus dui vel sem sed sagittis nam congue risus semper', 11);
-insert into endereco (cep, rua, complemento, numero_casa) values (166139710, '828 Carey Avenue', 'mattis pulvinar nulla pede ullamcorper augue a suscipit nulla elit ac nulla sed vel', 293);
+insert into endereco (cep, rua, complemento, numero_casa) values (470180514, '53614 Little Fleur Street', 'ornare imperdiet sapien urna', 354);
+insert into endereco (cep, rua, complemento, numero_casa) values (165619077, '47 Arapahoe Circle', 'eget massa tempor convallis nulla n', 33);
+insert into endereco (cep, rua, complemento, numero_casa) values (703900187, '745 Maple Street', 'lectus vestibulum quam sapien', 66);
+insert into endereco (cep, rua, complemento, numero_casa) values (633376349, '63 American Parkway', 'lacinia sapien quis libero nul', 291);
+insert into endereco (cep, rua, complemento, numero_casa) values (461843805, '54 Meadow Vale Way', 'quam pede lobortis ligula sit amet', 11);
+insert into endereco (cep, rua, complemento, numero_casa) values (589347880, '45293 Montana Junction', 'sollicitudin mi sit amet ', 440);
+insert into endereco (cep, rua, complemento, numero_casa) values (240335545, '4729 Arapahoe Point', 'ullamcorper purus sit amet ', 363);
+insert into endereco (cep, rua, complemento, numero_casa) values (431764249, '44 Westport Parkway', 'nisi vulputate nonummy ', 399);
+insert into endereco (cep, rua, complemento, numero_casa) values (785989369, '20728 Tennyson Hill', 'aliquet pulvinar sed n', 11);
+insert into endereco (cep, rua, complemento, numero_casa) values (166139710, '828 Carey Avenue', 'mattis pulvinar nulla pede', 293);
 
-insert into funcionarios (cpf, nome_funcionario, salario, funcao) values (153221474, 'Bryanty Dellenbach', '$3691.22', 'Vestibulum quam sapien, varius ut, blandit non, interdum in, ante.');
-insert into funcionarios (cpf, nome_funcionario, salario, funcao) values (794754770, 'Pattie Meiner', '$3671.23', 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit.');
-insert into funcionarios (cpf, nome_funcionario, salario, funcao) values (819753167, 'Emlynn Espinha', '$3143.94', 'Praesent lectus.');
-insert into funcionarios (cpf, nome_funcionario, salario, funcao) values (150869521, 'Korney Knatt', '$3746.23', 'Pellentesque viverra pede ac diam.');
-insert into funcionarios (cpf, nome_funcionario, salario, funcao) values (863849628, 'Myrwyn Shakspeare', '$3439.44', 'Nullam varius.');
-insert into funcionarios (cpf, nome_funcionario, salario, funcao) values (462053773, 'Wallie Durbann', '$3336.47', 'Vivamus tortor.');
-insert into funcionarios (cpf, nome_funcionario, salario, funcao) values (733959357, 'Lynne Milillo', '$2908.23', 'Maecenas ut massa quis augue luctus tincidunt.');
-insert into funcionarios (cpf, nome_funcionario, salario, funcao) values (071902071, 'Egor Summerhayes', '$3499.88', 'Donec vitae nisi.');
-insert into funcionarios (cpf, nome_funcionario, salario, funcao) values (640705086, 'Ninetta Revey', '$2820.05', 'Fusce lacus purus, aliquet at, feugiat non, pretium quis, lectus.');
-insert into funcionarios (cpf, nome_funcionario, salario, funcao) values (714289054, 'Chester Rosthorn', '$3495.94', 'Nullam varius.');
+insert into funcionarios (cpf, nome_funcionario, salario, funcao) values (153221474, 'Bryanty Dellenbach', 3691.22, 'Vestibulum i');
+insert into funcionarios (cpf, nome_funcionario, salario, funcao) values (794754770, 'Pattie Meiner', 3671.23, 'Lorem ipsum do');
+insert into funcionarios (cpf, nome_funcionario, salario, funcao) values (819753167, 'Emlynn Espinha', 3143.94, 'Praesent .');
+insert into funcionarios (cpf, nome_funcionario, salario, funcao) values (150869521, 'Korney Knatt', 3746.23, 'Pellentesqu');
+insert into funcionarios (cpf, nome_funcionario, salario, funcao) values (863849628, 'Myrwyn Shakspeare', 3439.44, 'Nullam v');
+insert into funcionarios (cpf, nome_funcionario, salario, funcao) values (462053773, 'Wallie Durbann', 3336.47, 'Vivamus t.');
+insert into funcionarios (cpf, nome_funcionario, salario, funcao) values (733959357, 'Lynne Milillo', 2908.23, 'Maecenas');
+insert into funcionarios (cpf, nome_funcionario, salario, funcao) values (071902071, 'Egor Summerhayes', 3499.88, 'Donec vitae nisi.');
+insert into funcionarios (cpf, nome_funcionario, salario, funcao) values (640705086, 'Ninetta Revey', 2820.05, 'Fusce lac');
+insert into funcionarios (cpf, nome_funcionario, salario, funcao) values (714289054, 'Chester Rosthorn', 3495.94, 'Nullam varius.');
 
 
 insert into equipamentos (idequipamentos, quantidade, ferramenta) values (1, 70, 'Milrinone Lactate');
@@ -112,24 +111,24 @@ insert into equipamentos (idequipamentos, quantidade, ferramenta) values (9, 18,
 insert into equipamentos (idequipamentos, quantidade, ferramenta) values (10, 39, 'ESIKA');
 
 
-insert into paciente (idpaciente, nome_paciente, sexo_paciente, especie_paciente, nasc_paciente) values (1, 'Bartlet Baddam', 'M', 'Armadillo, nine-banded', '15/10/2016');
-insert into paciente (idpaciente, nome_paciente, sexo_paciente, especie_paciente, nasc_paciente) values (2, 'Neal Mottini', 'F', 'Leopard, indian', '28/06/2022');
-insert into paciente (idpaciente, nome_paciente, sexo_paciente, especie_paciente, nasc_paciente) values (3, 'Karlene Dauber', 'M', 'Crane, stanley', '09/06/2018');
-insert into paciente (idpaciente, nome_paciente, sexo_paciente, especie_paciente, nasc_paciente) values (4, 'Glenden Dean', 'M', 'Dassie', '23/07/2019');
-insert into paciente (idpaciente, nome_paciente, sexo_paciente, especie_paciente, nasc_paciente) values (5, 'Glenn Yare', 'M', 'Peacock, blue', '15/02/2018');
-insert into paciente (idpaciente, nome_paciente, sexo_paciente, especie_paciente, nasc_paciente) values (6, 'Lira Hearl', 'F', 'Badger, eurasian', '20/05/2019');
-insert into paciente (idpaciente, nome_paciente, sexo_paciente, especie_paciente, nasc_paciente) values (7, 'Nanon Dallison', 'F', 'Greater sage grouse', '25/07/2019');
-insert into paciente (idpaciente, nome_paciente, sexo_paciente, especie_paciente, nasc_paciente) values (8, 'Krystalle Dumbare', 'M', 'Purple grenadier', '09/05/2022');
-insert into paciente (idpaciente, nome_paciente, sexo_paciente, especie_paciente, nasc_paciente) values (9, 'Cathryn Bidwell', 'F', 'Blacksmith plover', '26/03/2016');
-insert into paciente (idpaciente, nome_paciente, sexo_paciente, especie_paciente, nasc_paciente) values (10, 'Innis Maha', 'F', 'Blackbird, red-winged', '29/10/2022');
+insert into paciente (idpaciente, nome_paciente, sexo_paciente, especie_paciente, nasc_paciente) values (1, 'Bartlet Baddam', 'M', 'Armadillo, nine-banded', 15-10-2016);
+insert into paciente (idpaciente, nome_paciente, sexo_paciente, especie_paciente, nasc_paciente) values (2, 'Neal Mottini', 'F', 'Leopard, indian', 28-06-2022);
+insert into paciente (idpaciente, nome_paciente, sexo_paciente, especie_paciente, nasc_paciente) values (3, 'Karlene Dauber', 'M', 'Crane, stanley', 09-06-2018);
+insert into paciente (idpaciente, nome_paciente, sexo_paciente, especie_paciente, nasc_paciente) values (4, 'Glenden Dean', 'M', 'Dassie', 23-07-2019);
+insert into paciente (idpaciente, nome_paciente, sexo_paciente, especie_paciente, nasc_paciente) values (5, 'Glenn Yare', 'M', 'Peacock, blue', 15-02-2018);
+insert into paciente (idpaciente, nome_paciente, sexo_paciente, especie_paciente, nasc_paciente) values (6, 'Lira Hearl', 'F', 'Badger, eurasian',20-05-2019);
+insert into paciente (idpaciente, nome_paciente, sexo_paciente, especie_paciente, nasc_paciente) values (7, 'Nanon Dallison', 'F', 'Greater sage grouse', 25-07-2019);
+insert into paciente (idpaciente, nome_paciente, sexo_paciente, especie_paciente, nasc_paciente) values (8, 'Krystalle Dumbare', 'M', 'Purple grenadier', 09-05-2022);
+insert into paciente (idpaciente, nome_paciente, sexo_paciente, especie_paciente, nasc_paciente) values (9, 'Cathryn Bidwell', 'F', 'Blacksmith plover', 26-03-2016);
+insert into paciente (idpaciente, nome_paciente, sexo_paciente, especie_paciente, nasc_paciente) values (10, 'Innis Maha', 'F', 'Blackbird, red-winged', 29-10-2022);
 
 
-insert into servicos (idservico, descricao_servico, preco_servico, consulta_entrada, consulta_saida) values (1, 'Donec odio justo, sollicitudin ut, suscipit a, feugiat et, eros.', '$274.29', '21.01.2022', '30/01/2022');
-insert into servicos (idservico, descricao_servico, preco_servico, consulta_entrada, consulta_saida) values (2, 'Praesent blandit lacinia erat.', '$195.41', '23.01.2022', '28/01/2022');
-insert into servicos (idservico, descricao_servico, preco_servico, consulta_entrada, consulta_saida) values (3, 'Vestibulum sed magna at nunc commodo placerat.', '$233.83', '14.02.2022', '25/01/2022');
-insert into servicos (idservico, descricao_servico, preco_servico, consulta_entrada, consulta_saida) values (4, 'Nulla ut erat id mauris vulputate elementum.', '$218.35', '01.01.2022', '29/01/2022');
-insert into servicos (idservico, descricao_servico, preco_servico, consulta_entrada, consulta_saida) values (5, 'Praesent id massa id nisl venenatis lacinia. Aenean sit amet justo.', '$200.81', '19.02.2022', '18/01/2022');
-insert into servicos (idservico, descricao_servico, preco_servico, consulta_entrada, consulta_saida) values (6, 'Pellentesque eget nunc. Donec quis orci eget orci vehicula condimentum.', '$221.64', '15.02.2022', '15/01/2022');
+insert into servicos (idservico, descricao_servico, preco_servico, consulta_entrada, consulta_saida) values (1, 'Donec odio justo, sollicitudin ut, suscipit a, feugiat et, eros.', '$274.29', '21.01.2022', 30-01-2022);
+insert into servicos (idservico, descricao_servico, preco_servico, consulta_entrada, consulta_saida) values (2, 'Praesent blandit lacinia erat.', '$195.41', '23.01.2022', 28-01-2022);
+insert into servicos (idservico, descricao_servico, preco_servico, consulta_entrada, consulta_saida) values (3, 'Vestibulum sed magna at nunc commodo placerat.', '$233.83', '14.02.2022', 25-01-2022);
+insert into servicos (idservico, descricao_servico, preco_servico, consulta_entrada, consulta_saida) values (4, 'Nulla ut erat id mauris vulputate elementum.', '$218.35', '01.01.2022', 29-01-2022);
+insert into servicos (idservico, descricao_servico, preco_servico, consulta_entrada, consulta_saida) values (5, 'Praesent id massa id nisl venenatis lacinia. Aenean sit amet justo.', '$200.81', '19.02.2022', 18-01-2022);
+insert into servicos (idservico, descricao_servico, preco_servico, consulta_entrada, consulta_saida) values (6, 'Pellentesque eget nunc. Donec quis orci eget orci vehicula condimentum.', '$221.64', '15.02.2022', 15-01-2022);
 insert into servicos (idservico, descricao_servico, preco_servico, consulta_entrada, consulta_saida) values (7, 'Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Vivamus vestibulum sagittis sapien.', '$251.96', '07.02.2022', '23/01/2022');
 insert into servicos (idservico, descricao_servico, preco_servico, consulta_entrada, consulta_saida) values (8, 'Phasellus sit amet erat.', '$296.73', '03.02.2022', '14/01/2022');
 insert into servicos (idservico, descricao_servico, preco_servico, consulta_entrada, consulta_saida) values (9, 'Aenean fermentum.', '$286.92', '15.02.2022', '16/01/2022');
